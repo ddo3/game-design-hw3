@@ -11,9 +11,11 @@ public class ReactiveTarget : MonoBehaviour {
 		StartCoroutine(Die());
 	}
 
+
+	// is this where the player or the enemy dies ????
 	private IEnumerator Die() {
 		this.transform.Rotate(-75, 0, 0);
-		
+		//this.transform.Rotate(-128, 0, 0);
 		yield return new WaitForSeconds(1.5f);
 		
 		Destroy(this.gameObject);
