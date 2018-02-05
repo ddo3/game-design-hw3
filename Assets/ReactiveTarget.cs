@@ -12,11 +12,24 @@ public class ReactiveTarget : MonoBehaviour {
 	}
 
 
-	// is this where the player or the enemy dies ????
+	//This is where the enemy dies
 	private IEnumerator Die() {
-		this.transform.Rotate(-75, 0, 0);
-		//this.transform.Rotate(-128, 0, 0);
-		yield return new WaitForSeconds(1.5f);
+        float angle = 0;
+        bool angleIs90 = false;
+        while (!angleIs90)
+        {
+            angle += 10;
+
+            this.transform.Rotate(10, 0, 0);
+
+            yield return new WaitForSeconds(0.027f);
+
+            angleIs90 = (angle == 90);
+        }
+
+        //this.transform.Rotate(-75, 0, 0);
+        //this.transform.Rotate(-128, 0, 0);
+        yield return new WaitForSeconds(1.5f);
 		
 		Destroy(this.gameObject);
 	}
