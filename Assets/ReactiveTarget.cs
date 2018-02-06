@@ -2,8 +2,10 @@
 using System.Collections;
 
 public class ReactiveTarget : MonoBehaviour {
+    [SerializeField] private GameObject tombstonePrefab;
 
-	public void ReactToHit() {
+
+    public void ReactToHit() {
 		WanderingAI behavior = GetComponent<WanderingAI>();
 		if (behavior != null) {
 			behavior.SetAlive(false);
@@ -27,10 +29,18 @@ public class ReactiveTarget : MonoBehaviour {
             angleIs90 = (angle == 90);
         }
 
-        //this.transform.Rotate(-75, 0, 0);
-        //this.transform.Rotate(-128, 0, 0);
         yield return new WaitForSeconds(1.5f);
-		
-		Destroy(this.gameObject);
-	}
+
+        
+        Vector3 objectsPostion = this.transform.TransformPoint(this.transform.position);
+        //add the rotating tombstone 
+
+        //GameObject tombstone = new GameObject();
+
+        //tombstone = Instantiate(tombstonePrefab) as GameObject;
+
+        //tombstone.transform.position = objectsPostion;
+
+        Destroy(this.gameObject);
+    }
 }

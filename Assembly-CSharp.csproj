@@ -57,6 +57,7 @@
      <Compile Include="Assets\PlayerCharacter.cs" />
      <Compile Include="Assets\RayShooter.cs" />
      <Compile Include="Assets\ReactiveTarget.cs" />
+     <Compile Include="Assets\RotatingTombstone.cs" />
      <Compile Include="Assets\SceneController.cs" />
      <Compile Include="Assets\WanderingAI.cs" />
  <Reference Include="UnityEngine.UI">

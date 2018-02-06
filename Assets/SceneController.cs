@@ -3,76 +3,61 @@ using System.Collections;
 
 public class SceneController : MonoBehaviour {
 	[SerializeField] private GameObject enemyPrefab;
-	private GameObject _enemy;
+    
+
+	//private GameObject _enemy;
     private ArrayList _enemies;
 
-	void Update() {
+    void Start()
+    {
+        _enemies = new ArrayList();
 
-        //if (_enemies == null)
-        //{
-        //    _enemies = new ArrayList();
+        GameObject newEnemy = new GameObject();
 
-        //    GameObject newEnemy = new GameObject();
+        newEnemy = Instantiate(enemyPrefab) as GameObject;
 
-        //    newEnemy = Instantiate(enemyPrefab) as GameObject;
+        newEnemy.transform.position = new Vector3(0, 1, 0);
 
-        //    newEnemy.transform.position = new Vector3(0, 1, 0);
+        float angle = Random.Range(0, 360);
 
-        //    float angle = Random.Range(0, 360);
+        newEnemy.transform.Rotate(0, angle, 0);
 
-        //    newEnemy.transform.Rotate(0, angle, 0);
+        _enemies.Add(newEnemy);
 
-        //    _enemies.Add(newEnemy);
+    }
 
-        //}
 
-        //if (_enemies.Contains(null))
-        //{
-        //    int deadEnemyIndex = _enemies.IndexOf(null);
+    void Update() {
 
-        //    //recreate dead enemy
-        //    GameObject deadEnemy = (GameObject)_enemies[deadEnemyIndex];
-
-        //    deadEnemy = Instantiate(enemyPrefab) as GameObject;
-
-        //    deadEnemy.transform.position = new Vector3(0, 1, 0);
-
-        //    float angle = Random.Range(0, 360);
-
-        //    deadEnemy.transform.Rotate(0, angle, 0);
-
-        //    _enemies.Insert(deadEnemyIndex, deadEnemy);
-
-        //    //add new enemy to the list
-        //    //GameObject newEnemy = new GameObject();
-
-        //   /// newEnemy = Instantiate(enemyPrefab) as GameObject;
-
-        //    //newEnemy.transform.position = new Vector3(0, 1, 0);
-
-        //    ///angle = Random.Range(0, 360);
-
-        //    //newEnemy.transform.Rotate(0, angle, 0);
-
-        //    //_enemies.Add(newEnemy);
-        //}
-
-        if (_enemy == null)
+        foreach (GameObject enemy  in _enemies)
         {
+            if (enemy == null)
+            {   
 
-            _enemy = Instantiate(enemyPrefab) as GameObject;
-            _enemy.transform.position = new Vector3(0, 1, 0);
-            float angle = Random.Range(0, 360);
+                //add 1 enemy to restore the dead one 
+                GameObject oldEnemy = Instantiate(enemyPrefab) as GameObject;
+                oldEnemy.transform.position = new Vector3(0, 1, 0);
+                float angle = Random.Range(0, 360);
 
-            _enemy.transform.Rotate(0, angle, 0);
+                oldEnemy.transform.Rotate(0, angle, 0);
+
+                _enemies.Add(oldEnemy);
+
+                //remove the null element 
+                _enemies.Remove(enemy);
 
 
-            GameObject newE = new GameObject();
-            newE = Instantiate(enemyPrefab) as GameObject;
-            newE.transform.position = new Vector3(0, 1, 0);
-            angle = Random.Range(0, 360);
+                //now add a new enemy
 
-            newE.transform.Rotate(0, angle, 0);
+                GameObject newEnemy = Instantiate(enemyPrefab) as GameObject;
+                newEnemy.transform.position = new Vector3(0, 1, 0);
+                angle = Random.Range(0, 360);
+
+                newEnemy.transform.Rotate(0, angle, 0);
+
+                _enemies.Add(newEnemy);
+            }
+
         }
     }
 }
