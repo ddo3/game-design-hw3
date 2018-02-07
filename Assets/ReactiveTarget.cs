@@ -32,14 +32,14 @@ public class ReactiveTarget : MonoBehaviour {
         yield return new WaitForSeconds(1.5f);
 
         
-        Vector3 objectsPostion = this.transform.TransformPoint(this.transform.position);
+        Vector3 objectsPostion = this.transform.position;
         //add the rotating tombstone 
 
-        //GameObject tombstone = new GameObject();
+        GameObject tombstone = new GameObject();
 
-        //tombstone = Instantiate(tombstonePrefab) as GameObject;
+        tombstone = Instantiate(tombstonePrefab) as GameObject;
 
-        //tombstone.transform.position = objectsPostion;
+        tombstone.transform.position = objectsPostion;
 
         Destroy(this.gameObject);
     }

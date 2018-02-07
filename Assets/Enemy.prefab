@@ -111,6 +111,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae07628d3cadf441c98594bcc256becd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tombstonePrefab: {fileID: 1443220193388100, guid: 98a9b8859f6d01c458da4c80c9803f3c,
+    type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
