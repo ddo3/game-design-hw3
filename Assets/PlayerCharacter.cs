@@ -4,25 +4,124 @@ using System.Collections;
 public class PlayerCharacter : MonoBehaviour {
 	private int _health;
 
-	void OnGUI(){
-		GUI.Label (new Rect (10, 10, 100, 20), HealthBar());
+    public Rect labelPosition;
+
+    bool incrX = true;
+    bool incrY = true;
+
+    int x;
+    int y;
+    int height;
+    int width;
+
+    int diff = 5;
+
+
+    private bool playerDead;
+
+    void OnGUI(){
+        GUI.Label(new Rect(10, 10, 100, 20), HealthBar());
+
+        if (playerDead)
+        {
+            GUIStyle style = new GUIStyle();
+            style.fontSize = 27;
+            //style.fontStyle;
+            GUI.Label(labelPosition, "YOU DIED!!",style);
+        }
 	}
 
 	void Start() {
 		_health = 5;
-		OnGUI ();
+
+        y = 100;
+        x = 100;
+        height = 100;
+        width = 100;
+
+        labelPosition = new Rect(x, y, width, height);
+        playerDead = false;
 	}
 
 	public void Hurt(int damage) {
-		_health -= damage;
+        if (_health > 0)
+        {
+            _health -= damage;
+        }
+		
 		Debug.Log("Health: " + _health);
-		OnGUI ();
+
+        if (_health == 0)
+        {
+            playerDead = true;
+
+            //this.gameObject.SetActive(false);
+        }
 	}
+
+    public void Update()
+    {
+
+
+        if (playerDead)
+        {
+            if (x <= 0)
+            {
+                incrX = true;
+
+            }
+
+            if (x >= Screen.width) {
+                incrX = false;
+            }
+            
+            if( y <= 0)
+            {
+                incrY = true;
+
+            }
+
+            if(y >= Screen.height)
+            {
+
+                incrY = false;
+            }
+
+
+        
+            //now set x and y values 
+            if (incrX)
+            {
+
+                x += diff;
+                labelPosition.x += diff;
+            }
+            else
+            {
+                x -= diff;
+                labelPosition.x -= diff;
+            }
+
+            if (incrY)
+            {
+                y += diff;
+                labelPosition.y += diff;
+            }
+            else
+            {
+                labelPosition.y -= diff;
+                y -= diff;
+            }
+            
+        }
+
+    }
 
 	private string HealthBar(){
 		
-		string healthBar = "";
-		for(int i = 0; i <= _health ; i++){
+		string healthBar = "" + _health +": ";
+
+		for(int i = 0; i < _health ; i++){
 			healthBar = healthBar + "*";
 		}
 
