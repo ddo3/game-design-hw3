@@ -1,13 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[RequireComponent(typeof(CharacterController))]
 public class PlayerCharacter : MonoBehaviour {
 	private int _health;
 
     public Rect labelPosition;
 
     bool incrX = true;
-    bool incrY = true;
+	bool incrY = true;
 
     int x;
     int y;
@@ -20,6 +21,7 @@ public class PlayerCharacter : MonoBehaviour {
     private bool playerDead;
 
     void OnGUI(){
+		
         GUI.Label(new Rect(10, 10, 100, 20), HealthBar());
 
         if (playerDead)
@@ -41,6 +43,7 @@ public class PlayerCharacter : MonoBehaviour {
 
         labelPosition = new Rect(x, y, width, height);
         playerDead = false;
+		//_charController = GetComponent<CharacterController>();
 	}
 
 	public void Hurt(int damage) {
@@ -48,21 +51,19 @@ public class PlayerCharacter : MonoBehaviour {
         {
             _health -= damage;
         }
-		
-		Debug.Log("Health: " + _health);
 
         if (_health == 0)
         {
             playerDead = true;
 
-            //this.gameObject.SetActive(false);
+            
         }
 	}
 
+
     public void Update()
     {
-
-
+		
         if (playerDead)
         {
             if (x <= 0)
